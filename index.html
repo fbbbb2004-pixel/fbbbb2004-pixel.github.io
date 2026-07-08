@@ -1,40 +1,4 @@
-import qrcode
-from PIL import Image, ImageDraw, ImageFont
-
-# 🌟 LINK WEB CHÍNH CHỦ ĐÃ ĐỔI CHỮ CỦA BẠN 🌟
-qr_data = "https://fbbbb2004-pixel.github.io/" 
-
-qr = qrcode.QRCode(
-    version=None,
-    error_correction=qrcode.constants.ERROR_CORRECT_H,
-    box_size=10,
-    border=4,
-)
-qr.add_data(qr_data)
-qr.make(fit=True)
-
-img = qr.make_image(fill_color="#0f3460", back_color="#e8f4f8").convert('RGBA')
-width, height = img.size
-
-overlay = Image.new('RGBA', img.size, (255, 255, 255, 0))
-draw = ImageDraw.Draw(overlay)
-center_x, center_y = width // 2, height // 2
-heart_size = 75  
-
-circle_radius = heart_size // 2 + 5
-draw.ellipse([center_x - circle_radius, center_y - circle_radius, 
-              center_x + circle_radius, center_y + circle_radius], fill=(232, 244, 248, 255))
-
-def draw_heart(draw_obj, cx, cy, size, color):
-    s = size // 2
-    draw_obj.ellipse([cx - s, cy - s//2, cx, cy + s//2], fill=color)
-    draw_obj.ellipse([cx, cy - s//2, cx + s, cy + s//2], fill=color)
-    draw_obj.polygon([(cx - s, cy), (cx + s, cy), (cx, cy + s)], fill=color)
-
-draw_heart(draw, center_x, center_y - 5, heart_size, (255, 107, 157, 255))
-draw_heart(draw, center_x, center_y - 5, heart_size - 10, (255, 255, 255, 255))
-draw_heart(draw, center_x, center_y - 5, heart_size - 18, (255, 107, 157, 255))
-
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1.0'><style>body{height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:center;font-family:sans-serif;margin:0;background:url('IMG_20260709_025328.jpg') no-repeat center center/cover}#o{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:-1}.f{position:absolute;top:-10px;color:#fff;animation:f linear infinite;opacity:0.8;z-index:1}@keyframes f{to{transform:translateY(100vh) rotate(360deg)}}.m{text-align:center;z-index:2;padding:20px}h1{color:#ff6b9d;font-size:2.5em;text-shadow:0 0 15px #ff0055;margin:0;animation:p 2s infinite}@keyframes p{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}p{color:#fff;font-size:1.8em;text-shadow:0 0 10px #000;margin-top:10px}</style></head><body><div id='o'></div><div class='m'><h1>❄️ Tuyết Yêu Thương ❄️</h1><p>💕 Em làm người yêu anh nha 💕</p></div><script>function c(){const e=document.createElement('div');e.className='f';e.innerHTML='❄';e.style.left=Math.random()*100+'vw';e.style.animationDuration=Math.random()*3+2+'s';e.style.fontSize=Math.random()*15+10+'px';document.body.appendChild(e);setTimeout(()=>{e.remove()},5000)}setInterval(c,150);for(let i=0;i<20;i++)setTimeout(c,i*50);</script></body></html>
 img = Image.alpha_composite(img, overlay)
 
 border_size = 20
